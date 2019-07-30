@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑器2.0.0</title>
+</head>
+<body>
+这样就解决了组件间同步的问题，通过Model的变化来更新相关视图的值，有个缺点，就是只能固定一个方法或者处理方式，能不能把对应的处理方式用回调传给model的set？
+<div id="app"></div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<script src="js/all.js"></script>
+<script>
+    // 用gulp打包的文件，没办法获取到暴露的变量，只能绑到window下？
+    var ae = new AE();
+    ae.init();
+</script>
+</body>
+</html>
