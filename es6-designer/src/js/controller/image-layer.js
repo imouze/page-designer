@@ -9,10 +9,10 @@ class ImageLayer{
         // 图层数据
         this.model = new ImageModel();
         // 属性信息
-        this.property = new BaseProperty();
+        this.propertyView = new BaseProperty();
 
         this.model.addView(this.view);
-        this.model.addView(this.property);
+        this.model.addView(this.propertyView);
     }
 
     init(){

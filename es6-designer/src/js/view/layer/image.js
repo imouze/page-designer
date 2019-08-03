@@ -13,8 +13,6 @@ class ImageLayer extends BaseLayer{
         super.init();
 
         this.render();
-
-
     }
 }
 
