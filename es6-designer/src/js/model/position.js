@@ -1,5 +1,6 @@
 import Size from './size'
 import Origin from './origin'
+import { convert } from '../util/index';
 
 class Position {
     constructor(){
@@ -8,25 +9,25 @@ class Position {
     }
 
     set x(v){
-        this.origin.x = v;
+        this.origin.x = convert.toInt(v);
     }
     get x(){
         return this.origin.x;
     }
     set y(v){
-        this.origin.y = v;
+        this.origin.y = convert.toInt(v);
     }
     get y(){
         return this.origin.y;
     }
     set width(w){
-        this.size.width = w;
+        this.size.width = convert.toInt(v);
     }
     get width(){
         return this.size.width;
     }
     set height(h){
-        this.size.height = h;
+        this.size.height = convert.toInt(v);
     }
     get height(){
         return this.size.height;

@@ -1,10 +1,9 @@
-import Base from '../core/base'
+import Component from '../core/component'
 
 /**
- * 表示浮动层
- * 可以表示遮罩，也可以表示弹窗
+ * 表示覆盖层，可以是弹窗，可以是遮罩等
  */
-class Overlay extends Base {
+class Overlay extends Component {
     constructor(options){
         super(options);
     }

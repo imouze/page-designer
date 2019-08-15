@@ -1,4 +1,4 @@
-import ImageModel from '../model/image-layer';
+import ImageModel from '../model/image';
 import ImageView from '../view/layer/image';
 import BaseProperty from '../view/property/base';
 

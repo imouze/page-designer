@@ -5,14 +5,8 @@ class ImageLayer extends BaseLayer{
         super(options);
     }
 
-    render(){
-        super.render();
-    }
-
-    init(){
-        super.init();
-
-        this.render();
+    _render(){
+        super._render();
     }
 }
 

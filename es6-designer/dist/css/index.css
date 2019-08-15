@@ -1,0 +1,299 @@
+html,body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#app{
+    width: 100%;
+    height: 100%;
+    outline: 0 none;
+
+    background: #f9f9f9;
+}
+#app, #app *{
+    outline: 0 none
+}
+.scene{
+    width: 100%;
+    height: 100%;
+}
+.box{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 400px;
+    height: 400px;
+    background: #ff0000;
+}
+.box .dragEl{
+    width: 100%;
+    height: 32px;
+    background: #44a;
+}
+.restrict{
+    position: absolute;
+    top: 5%;
+    left: 200px;
+    width: 500px;
+    height: 500px;
+    background: #233;
+}
+.contextmenu{
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 2px 8px -2px #ccc;
+}
+.contextmenu .contextmenu-item{
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+}
+.contextmenu .contextmenu-item:hover{
+    background: #f3f3f3;
+    color: #111;
+}
+
+#restrict2{
+    left: 800px;
+}
+
+.topbar{
+    background: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px -2px #ccc;
+
+    z-index: 10001;
+}
+.topbar .topbar-operation{
+    position: absolute;
+    padding: 8px 0;
+}
+.topbar .topbar-left{
+    left: 10px;
+}
+.topbar .topbar-right{
+    right: 30px;
+}
+.topbar button{
+    border: 0 none;
+    border-radius: 5px;
+    height: 34px;
+    background: #fff;
+    font-size: 14px;
+    float: left;
+    padding: 0 15px;
+    outline: 0 none;
+}
+.topbar button:hover{
+    background: #f3f3f3;
+    cursor: pointer;
+}
+.topbar button:active{
+    background: rgb(0, 140, 233);
+    border-color: rgb(0, 140, 233);
+    color: #fff;
+}
+.topbar .topbar-left button{
+    font-size: 18px;
+    padding: 0 10px;
+    margin-right: 5px;
+}
+.topbar .topbar-operation-more{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/* .topbar .dropdown{
+    width: 20px;
+    height: 50px;
+} */
+.topbar .dropdown-toggle{
+    padding: 0;
+    border: 0 none;
+    border-radius: 0;
+    width: 20px;
+    height: 50px;
+    float: none;
+}
+.topbar .dropdown-toggle:hover,
+.topbar .dropdown-toggle:active{
+    background: #f3f3f3;
+    color: #333;
+}
+.topbar .dropdown-menu{
+    position: absolute;
+    right: 3px;
+    left: auto;
+    top: 110%;
+}
+.property{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #fff;
+    /* border-left: 1px solid #eee; */
+    /* border-top: 1px solid #ccc; */
+    height: 600px;
+    width: 300px;
+    box-shadow: 0 0 5px 0 #ccc;
+
+    padding-top: 50px;
+
+    z-index: 10000;
+
+    background: #f3f3f3;
+}
+
+.property header{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    font-size: 16px;
+}
+.property section{
+    padding: 15px 10px 5px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+.property .field-group{
+    margin-bottom: 15px;
+}
+.property .field-group::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+.property .field-group label{
+    width: 70px;
+    float: left;
+    font-weight: normal;
+    line-height: 30px;
+    margin-bottom: 0;
+}
+.property .field-group .input-text{
+    float: left;
+    width: 94px;
+    margin-left: 10px;
+    background: #f5f5f5;
+    border: 0 none;
+    border-radius: 4px;
+    padding: 3px;
+    font-size: 14px;
+    line-height: 24px;
+    box-shadow: inset 1px 1px 1px 0 #eee;
+}
+.property .field-group .input-text-full{
+    width: 198px;
+}
+.property .field-group .field-btn-group{
+    float: left;
+    width: 198px;
+    margin-left: 10px;
+}
+.property .field-group .field-btn-group button{
+    background: none;
+    border: 0 none;
+    height: 30px;
+    width: 30px;
+    font-size: 16px;
+}
+.property .field-group .field-btn-group button.checked,
+.property .field-group .field-btn-group button:hover{
+    background: #f5f5f5;
+}
+
+.mini-operation{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.mini-operation .mini-left{
+    position: absolute;
+    left: 0;
+}
+
+
+/* 面板 */
+.panel{
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 400px;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px -2px #ccc;
+}
+.panel .head{
+    height: 40px;
+    position: relative;
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+}
+.panel .head .title{
+    font-size: 14px;
+    line-height: 40px;
+}
+.panel .head .close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.panel .arrow{
+    position: absolute;
+    top: -20px;
+    left: 45px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+
+/*主场景*/
+.scene{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.scene .page{
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.overlay{
+    position: absolute;
+}
+
+.popup{
+    position: absolute;
+    z-index: 10002;
+}
+.popup .popup-body{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 #ccc;
+    border-radius: 5px;
+}
+.popup .arrow{
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+.popup .arrow.arrow-top{
+    top: -20px;
+}

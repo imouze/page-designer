@@ -3,5 +3,7 @@ module.exports = {
     Image: 2,
     Video: 3,
     Audio: 4,
-    Qrcode: 88
+    Qrcode: 88,
+    Pagination: 89,
+    CatalogGroup: 90
 };

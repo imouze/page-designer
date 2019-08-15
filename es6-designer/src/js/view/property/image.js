@@ -1,7 +1,12 @@
-import BaseProperty from './base';
+import Component from '../../core/component'
 
-class ImageProperty extends BaseProperty{
-
+/**
+ * 图片属性层
+ */
+class ImageProperty extends Component{
+    constructor(){
+        
+    }
 }
 
 module.exports = ImageProperty;

@@ -7,6 +7,26 @@ const log = require('gulplog');
 const source = require('vinyl-source-stream');
 const wrap = require('gulp-exports');
 
+gulp.task('fonts', function (done) {
+    gulp.src('./src/fonts/*.**')
+        .pipe(gulp.dest('./dist/fonts'));
+
+    // gulp.src('./webuploader/*.css')
+    //     .pipe(gulp.dest('./dist/webuploader'));
+
+    done();
+});
+
+gulp.task('css', function (done) {
+    gulp.src('./src/css/**')
+        .pipe(gulp.dest('./dist/css'));
+
+    // gulp.src('./webuploader/*.css')
+    //     .pipe(gulp.dest('./dist/webuploader'));
+
+    done();
+});
+
 gulp.task('script', function(done){
     browserify({
         entries: ['./src/js/index.js'],
@@ -46,13 +66,14 @@ gulp.task('server', function(done) {
     });
 
     gulp.watch('./src/js/*.js', gulp.series('script'));
+    gulp.watch('./src/css/*.css', gulp.series('css'));
     gulp.watch('./src/*.html',  gulp.series('html'));
     gulp.watch('./dist/**/*.*').on('change', browserSync.reload);
 
     done();
 });
 
-gulp.task('default', gulp.series('script', 'html', 'server', function(){
+gulp.task('default', gulp.series('script', 'css', 'fonts', 'html', 'server', function(){
 
 }))
 

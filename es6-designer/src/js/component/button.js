@@ -1,57 +1,44 @@
-import Base from '../core/base'
+import Component from '../core/component'
 
 /**
  * 按钮类
  *
  */
-class Button extends Base{
+class Button extends Component {
 
-    constructor(options){
+    constructor(options) {
         super(options);
         this.text = '';
         this.tagName = 'button';
+        this.className = this.prefix + 'button';
+        this.handler = function () { };
     }
 
-    init(){
-        super.init();
+    _render() {
+        super._render();
 
-        this.render();
-        this.bind();
-    }
-
-    render(){
-        super.render();
+        this.$el.html(this.text);
 
         this.$el.attr('type', 'button');
-
-        if(this.parent){
-
-        } else {
-            this.$el.appendTo('body')
-        }
-
-        this.$el.text(this.text);
-
-        this.renderred = true;
     }
 
-    bind(){
-        this.$el.on('click', $.proxy(this.clickHandler, this))
+    _bind() {
+        super._bind();
+
+        this.$el.on('click', $.proxy(this.onClick, this))
     }
 
-    clickHandler(e){
+    onClick(e) {
         this.emit('beforeClick', e);
 
-
-        if(this.handler){
-            this.hanlder.call(this, e);
+        if (this.handler) {
+            this.handler.call(this, e);
         }
-
 
         this.emit('afterClick', e);
     }
 
-    addChild(){
+    addChild() {
         throw '暂时不支持添加子组件';
     }
 }
