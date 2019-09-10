@@ -21,13 +21,13 @@ class Position {
         return this.origin.y;
     }
     set width(w){
-        this.size.width = convert.toInt(v);
+        this.size.width = convert.toInt(w);
     }
     get width(){
         return this.size.width;
     }
     set height(h){
-        this.size.height = convert.toInt(v);
+        this.size.height = convert.toInt(h);
     }
     get height(){
         return this.size.height;

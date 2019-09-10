@@ -12,6 +12,7 @@ class Button extends Component {
         this.tagName = 'button';
         this.className = this.prefix + 'button';
         this.handler = function () { };
+        this.title = ''
     }
 
     _render() {
@@ -20,6 +21,10 @@ class Button extends Component {
         this.$el.html(this.text);
 
         this.$el.attr('type', 'button');
+
+        if(this.title){
+            this.$el.attr('title', this.title);
+        }
     }
 
     _bind() {

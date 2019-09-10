@@ -3,7 +3,7 @@
  * 右键菜单改成只能创建一次，已创建将不再创建
  */
 module.exports = superClass => class extends superClass {
-    constructor(...args) {
+    constructor(args) {
         super(args);
 
         this.contextmenuClass = 'contextmenu';

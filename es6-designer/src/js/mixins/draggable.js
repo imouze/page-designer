@@ -3,7 +3,7 @@
  * @param superClass
  */
 module.exports = superClass => class extends superClass {
-    constructor(...args) {
+    constructor(args) {
         super(args);
         // 受到约束的区域
         this.restrict = null;
@@ -38,6 +38,10 @@ module.exports = superClass => class extends superClass {
     onMouseDown(e) {
         e.preventDefault();
         e.stopPropagation();
+
+        // 点击执行之前
+        this.emit('layer:beforemove', e);
+
         const $el = this.$el;
         this.dragging = true;
         $(document).on('mousemove', $.proxy(this.onMouseMove, this));
@@ -47,6 +51,12 @@ module.exports = superClass => class extends superClass {
         this.startY = e.pageY;
         this.origin.x = $el.position().left
         this.origin.y = $el.position().top
+
+        // 点击执行之后
+        this.emit('layer:movestart', {
+            startX: this.startX,
+            startY: this.startY
+        }, e);
     }
 
     onMouseMove(e) {
@@ -104,6 +114,12 @@ module.exports = superClass => class extends superClass {
             
             this.$el.css('left', l + 'px')
             this.$el.css('top', t + 'px')
+
+            // 拖动中
+            this.emit('layer:moving', {
+                left: l,
+                top: t
+            }, e);
         }
     }
 
@@ -113,5 +129,11 @@ module.exports = superClass => class extends superClass {
         this.dragging = false;
         $(document).off('mousemove', $.proxy(this.onMouseMove, this));
         $(document).off('mouseup', $.proxy(this.onMouseUp, this));
+
+        // 拖动结束
+        this.emit('layer:moveend', {
+            left: this.$el.position().left,
+            top: this.$el.position().top
+        }, e);
     }
 };

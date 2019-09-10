@@ -1,4 +1,5 @@
 import Observer from './observer';
+import { debug } from 'util';
 
 /**
  * 基础类
@@ -10,6 +11,7 @@ class Base extends Observer {
      */
     constructor(options) {
         super(options);
+
         // 取得第一个参数为配置
         this.options = options;
         /**
@@ -47,6 +49,10 @@ class Base extends Observer {
          * 添加到指定对象
          */
         this.appendTo = null;
+        /**
+         * 元素ID属性，有些地方需要通过ID来取得，所以增加这个属性
+         */
+        this.id = '';
     }
 
     /**
@@ -75,7 +81,7 @@ class Base extends Observer {
         if (!this.tagName) {
             this.tagName = 'div';
         }
-        return $(document.createElement(this.tagName));
+        return $(document.createElement(this.tagName)).attr('id', this.id);
     }
 
     /**
@@ -126,10 +132,10 @@ class Base extends Observer {
      * 绑定事件
      * 子类不需要继承以及重写
      */
-    bind() {
+    bind(args) {
         this.emit('beforeBind');
 
-        this._bind();
+        this._bind(args);
 
         this.emit('afterBind');
     }
@@ -138,7 +144,7 @@ class Base extends Observer {
      * 绑定事件
      * 子类可以继承以及重写
      */
-    _bind() {
+    _bind(args) {
         const self = this;
         this.$el.on('click', function (e) {
             self.$el.addClass('focused')
@@ -167,7 +173,10 @@ class Base extends Observer {
      * 销毁
      * 子类可以继承以及重写
      */
-    _destroy() { }
+    _destroy() {
+        this.$el.off();
+        this.$el.remove();
+    }
 }
 
 module.exports = Base;

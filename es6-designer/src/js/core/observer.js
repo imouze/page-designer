@@ -43,6 +43,17 @@ class Observer {
         }
         return this;
     }
+
+    once(name, ...args){
+        if(this.listeners.hasOwnProperty(name)){
+            this.listeners[name].forEach((item, key, arr) => {
+                item.apply(this, args)
+                this.off(name, item)
+            })
+        }
+
+        return this;
+    }
 }
 
 

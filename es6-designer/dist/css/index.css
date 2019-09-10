@@ -180,13 +180,17 @@ html,body{
     float: left;
     width: 94px;
     margin-left: 10px;
-    background: #f5f5f5;
+    background: #f9f9f9;
     border: 0 none;
     border-radius: 4px;
     padding: 3px;
     font-size: 14px;
     line-height: 24px;
-    box-shadow: inset 1px 1px 1px 0 #eee;
+    box-shadow: inset 1px 1px 1px 0 #f0f0f0;
+}
+.property .field-group .input-text[readonly]{
+    background: #eee;
+    box-shadow: inset 1px 1px 1px 0 #ddd;
 }
 .property .field-group .input-text-full{
     width: 198px;
@@ -294,6 +298,87 @@ html,body{
     border-style: solid;
     border-color: transparent transparent #fff transparent;
 }
-.popup .arrow.arrow-top{
-    top: -20px;
+
+/* 图层类型 */
+.layer-list-content{
+    padding: 20px;
+}
+.layer-item{
+    float: left;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px 0;
+}
+.layer-item:hover{
+    border-color: #333;
+    cursor: pointer;
+    color: #333;
+}
+.layer-item span{
+    display: block;
+}
+.layer-item .fa{
+    font-size: 30px;
+}
+.layer-item .layer-name{
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+
+/* 图层 */
+.layer{
+    position: absolute;
+}
+/* 图层展示内容 */
+.layer .layer-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #333;
+}
+.layer.active .layer-body{
+    border-style: solid;
+    border-color: #f00;
+    box-shadow: 0 0 1px 0 #ccc;
+}
+/* 子图层 */
+.layer .layer-children{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* 图层标签 */
+.layer .layer-type{
+    position: absolute;
+    top: -16px;
+    right: 0;
+    /* background:rgb(26, 154, 228); */
+    background: #333;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    font-size: 12px;
+    padding: 0 2px;
+    font-family: simsun;
+}
+.layer.active .layer-type{
+    background:#f00;
+}
+/* 图层按钮 */
+.layer .layer-btns{
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 40px;
+    display: none;
+}
+.layer.active .layer-btns{
+    display: block;
 }

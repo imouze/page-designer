@@ -30,7 +30,7 @@ class Component extends Base{
         this.children.forEach(child => {
             if(!child.renderred){ // 如果是异步渲染则会出问题
                 child.init();
-                // 添加到指定的元素
+                // 添加到指定的元素，有个风险，如果appendTo不是当前组件下的话，添加是其他地方的，可能会出问题
                 if(child.appendTo){
                     child.$el.appendTo(child.appendTo)
                 } else {
@@ -72,21 +72,37 @@ class Component extends Base{
         this.children.push(child);
 
         if(child.renderred){
-            this.$el.append(child.$el);
+            if(child.appendTo){
+                child.appendTo.append(child.$el)
+            } else {
+                this.$el.append(child.$el);
+            }
         }
         return this;
     }
-
+    /**
+     * 移除某个子组件
+     * @param {Component} child 子组件
+     */
     removeChild(child) {
         this.children.forEach((c, i) => {
             if (child === c) {
-                child.$el.off();
-                child.$el.remove();
+                child.destroy();
                 this.children.splice(i, 1);
             }
         });
 
         return this;
+    }
+
+    /**
+     * 移除所有子组件
+     */
+    removeAllChild(){
+        this.children.forEach((child, i) => {
+            child.destroy();
+            this.children.splice(i, 1)
+        })
     }
 
     getChildren() {

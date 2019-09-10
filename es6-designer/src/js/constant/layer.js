@@ -1,3 +1,6 @@
+/**
+ * 层的类型，用于判断数据的layerType
+ */
 module.exports = {
     Text: 1,
     Image: 2,

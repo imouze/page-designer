@@ -4,7 +4,7 @@ class TextLayer extends BaseLayer {
     constructor(options){
         super(options);
 
-        this.className = super.className + ' text';
+        this.className = this.prefix + 'layer-text';
     }
 }
 

@@ -5,7 +5,7 @@ import Base from '../core/base'
  * 分头部，中间内容区，底部三个区域，新增toolbar区，用于操作关闭或者展开收缩
  */
 class Panel extends Base {
-    constructor(...args) {
+    constructor(args) {
         super(args);
 
         this.className = 'panel';

@@ -7,11 +7,9 @@
  * @returns {Mix}
  */
 function mix(...mixins){
-    function Mix(superClass){
-        return class extends superClass {
-            constructor(args){
-                super(args);
-            }
+    let Mix = superClass => class extends superClass {
+        constructor(args){
+            super(args);
         }
     }
 

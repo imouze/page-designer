@@ -21,7 +21,7 @@ class Page extends draggable(Component){
         super._bind();
 
         this.$page.on('click', function(e){
-            e.preventDefault();
+            // e.preventDefault();
             console.log('page clicked')
         })
     }

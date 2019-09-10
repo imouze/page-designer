@@ -1,7 +1,8 @@
 import Observer from './core/observer';
-import Topbar from './view/topbar';
+import Topbar from './controller/topbar';
 import KeyCode from './constant/keyCode';
-import PageController from './controller/page';
+import Page from './controller/page';
+import Property from './view/property/property';
 
 /**
  * 编辑器主界面
@@ -11,6 +12,9 @@ class AlbumEditor extends Observer{
         super();
     }
 
+    /**
+     * 初始化先加载数据，比如字典等
+     */
     init() {
         /**
          * 主要分几个区域：
@@ -19,11 +23,13 @@ class AlbumEditor extends Observer{
          * 3.属性弹窗
          * 页面属性放在topbar，需要有一个数据进行传递
          */
-        const page = new PageController();
+        const page = new Page();
         const topbar = new Topbar();
+        const property = new Property();
+        
         // 点击文件的图片时
-        topbar.on('click:image', function(){
-
+        topbar.on('click:image', function(instance){
+            // page.add(instance);
         });
         // 点击保存时
         topbar.on('save', function(){
@@ -57,9 +63,22 @@ class AlbumEditor extends Observer{
         topbar.on('pagesettings', function(){
 
         });
+        topbar.on('create:layer', function(instance){
+            if(instance){
+                // 属性展示在哪里
+                instance.setProperty(property);
+                // 插入所在元素
+                instance.view.appendTo = page.view.$page;
+                // 拖动限制区域
+                instance.view.restrict = page.view.$page;
+                page.view.addChild(instance.view);
+            }
+        })
         topbar.init();
 
-        $('#app').append(topbar.$el);
+        property.init();
+        $('#app').append(property.$el);
+        $('#app').append(topbar.view.$el);
 
         this.bind();
 
@@ -86,7 +105,7 @@ class AlbumEditor extends Observer{
         $('#app').on('keydown', function(e){
             e.stopPropagation();
             console.log(e.keyCode)
-            if(e.ctrlKey && e.keyCode === KeyCode.S){
+            if(e.ctrlKey && e.keyCode === KeyCode.KEY_S){
                 console.log('ctrl + s');
                 return false;
             }
@@ -105,7 +124,7 @@ class AlbumEditor extends Observer{
         // ctrl+l 弹出插入目录设置 l:catalog
         $(document).on('keydown', function(e){
             // 命中快捷键return false,否则会执行浏览器的操作
-            if(e.ctrlKey && e.keyCode === KeyCode.S){
+            if(e.ctrlKey && e.keyCode === KeyCode.KEY_S){
                 console.log('ctrl + s');
                 return false;
             }

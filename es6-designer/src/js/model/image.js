@@ -29,8 +29,8 @@ class ImageModel extends Model{
         function complete(){
             self.width = img.width;
             self.height = img.height;
-            // 同步更新尺寸
-            self.emit('sync:size');
+            // 订阅触发更新地址
+            self.emit('sync:url');
         }
 
         this.data.url = url;
@@ -39,13 +39,15 @@ class ImageModel extends Model{
         return this.data.url
     }
     set width(width){
-        this.data.imageWidth = convert.toInt(width)
+        this.data.imageWidth = convert.toInt(width);
+        this.emit('sync:width', width);
     }
     get width(){
         return this.data.imageWidth
     }
     set height(height){
-        this.data.imageHeight = convert.toInt(height)
+        this.data.imageHeight = convert.toInt(height);
+        this.emit('sync:height', height);
     }
     get height(){
         return this.data.imageHeight
