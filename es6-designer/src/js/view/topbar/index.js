@@ -1,7 +1,6 @@
 import Component from '../../core/component'
 import Button from '../../component/button'
 import DropDown from '../../component/dropdown'
-import Popup from '../../component/popup'
 
 /**
  * 顶部操作区

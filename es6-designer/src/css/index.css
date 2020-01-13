@@ -133,9 +133,10 @@ html,body{
     top: 110%;
 }
 .property{
-    position: absolute;
-    right: 0;
+    position: fixed;
+    right: -300px;
     top: 0;
+    height: 100%;
     background: #fff;
     /* border-left: 1px solid #eee; */
     /* border-top: 1px solid #ccc; */
@@ -148,6 +149,8 @@ html,body{
     z-index: 10000;
 
     background: #f3f3f3;
+
+    transition: right 200ms;
 }
 
 .property header{

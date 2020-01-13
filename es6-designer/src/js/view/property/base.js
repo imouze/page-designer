@@ -40,6 +40,12 @@ class BaseProperty extends Component {
         this.model = options.model;
     }
 
+    _render(){
+        super._render();
+
+        this.initValue();
+    }
+
     _bind() {
         const $el = this.$el;
         $el.on('blur', 'input[name=level]', $.proxy(this.onLevel, this));
@@ -151,6 +157,20 @@ class BaseProperty extends Component {
             return false;
         }
         this.model.alpha = v;
+    }
+
+    initValue(){
+        const model = this.model;
+        const inputList = this.$el.find('input[type=text]');
+
+        console.log(model);
+        inputList.each(function(){
+            const $this = $(this);
+            const name = $this.attr('name');
+            if(model[name] != 'undefined'){
+                $this.val(model[name]);
+            }
+        })
     }
 }
 

@@ -916,7 +916,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Button;
 });
 
-},{"../core/component":13}],6:[function(require,module,exports){
+},{"../core/component":12}],6:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../core/component", "./button"], factory);
@@ -1046,224 +1046,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Dropdown;
 });
 
-},{"../core/component":13,"./button":5}],7:[function(require,module,exports){
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["../core/component"], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(require("../core/component"));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(global.component);
-    global.popup = mod.exports;
-  }
-})(this, function (_component) {
-  "use strict";
-
-  _component = _interopRequireDefault(_component);
-
-  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-  function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-  function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-  function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-  function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-  function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-  function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-  function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-  var DIRETION = {
-    LEFT: 'directionLeft',
-    TOP: 'directionTop',
-    RIGHT: 'directionRight',
-    BOTTOM: 'directionBottom'
-    /**
-     * 弹出层仅支持编辑器
-     */
-
-  };
-
-  var Popup =
-  /*#__PURE__*/
-  function (_Component) {
-    _inherits(Popup, _Component);
-
-    function Popup(options) {
-      var _this;
-
-      _classCallCheck(this, Popup);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Popup).call(this, options));
-      _this.className = _this.prefix + 'popup'; // 默认箭头方向
-
-      _this.direction = 'left';
-      _this.animation = false;
-      _this.tpl = "\n            <div class=\"arrow\"></div>\n            <div class=\"popup-body\"></div>\n        ";
-      _this.appendTo = $('body');
-      _this.position = {
-        left: 0,
-        top: 0
-      };
-      _this.width = 0;
-      _this.height = 0; // 触发者
-
-      _this.trigger = null;
-      return _this;
-    }
-
-    _createClass(Popup, [{
-      key: "_render",
-      value: function _render() {
-        _get(_getPrototypeOf(Popup.prototype), "_render", this).call(this);
-
-        if (this.direction && typeof this.direction === 'string') {
-          var method = this[DIRETION[this.direction.toUpperCase()]];
-          method && method.call(this);
-        }
-
-        if (this.animation) {
-          this.$el.addClass('fadeInDown animated'); // this.$el.addClass('fade in');
-        } // 当前弹窗定位
-
-
-        this.$el.css({
-          width: this.width,
-          height: this.height,
-          left: this.position.left,
-          top: this.position.top
-        }); // 弹出位置不能超出屏幕宽度
-        // 箭头要对准触发弹出的中间位置
-        // 点击当前不能隐藏，只有点击空白地方才能隐藏
-        // 包含动画效果
-
-        if (this.appendTo && this.appendTo.length) {
-          this.$el.appendTo(this.appendTo);
-        }
-      }
-    }, {
-      key: "_bind",
-      value: function _bind() {
-        _get(_getPrototypeOf(Popup.prototype), "_bind", this).call(this);
-
-        $(document).on('click', $.proxy(this.clickOut, this));
-      }
-    }, {
-      key: "_destroy",
-      value: function _destroy() {
-        _get(_getPrototypeOf(Popup.prototype), "_destroy", this).call(this);
-
-        $(document).off('click', $.proxy(this.clickOut, this));
-      }
-    }, {
-      key: "clickOut",
-      value: function clickOut(e) {
-        var $el = this.$el;
-        var self = this;
-        var trigger = $(this.trigger);
-
-        if (!($el.is(e.target) || $el.has(e.target).length || trigger.is(e.target) || trigger.has(e.target).length)) {
-          self.hide();
-        }
-      }
-    }, {
-      key: "directionTop",
-      value: function directionTop() {
-        var docWidth = $(document).width();
-        var oldLeft = this.position.left;
-        var space = 5;
-        var arrowBorderWidth = 10;
-        this.$arrow = this.$el.find('.arrow');
-        this.position.left = this.position.left - this.width / 2;
-
-        if (this.position.left < 5) {
-          this.position.left = space;
-        } else if (this.position.left + this.width > docWidth) {
-          this.position.left = docWidth - this.width - space;
-        }
-
-        this.$arrow.css({
-          top: '-20px',
-          left: oldLeft - this.position.left - arrowBorderWidth
-        });
-      }
-    }, {
-      key: "directionBottom",
-      value: function directionBottom() {
-        var docWidth = $(document).width();
-        var oldLeft = this.position.left;
-        var space = 5;
-        var arrowBorderWidth = 10;
-        this.$arrow = this.$el.find('.arrow');
-        this.position.left = this.position.left - this.width / 2;
-
-        if (this.position.left < 5) {
-          this.position.left = space;
-        } else if (this.position.left + this.width > docWidth) {
-          this.position.left = docWidth - this.width - space;
-        }
-
-        this.$arrow.css({
-          bottom: '-20px',
-          left: oldLeft - this.position.left - arrowBorderWidth
-        });
-      }
-    }, {
-      key: "directionLeft",
-      value: function directionLeft() {
-        var docHeight = $(document).height();
-        var oldTop = this.position.top;
-        var space = 5;
-        var arrowBorderWidth = 10;
-        this.$arrow = this.$el.find('.arrow');
-        this.position.top = this.position.top - this.height / 2;
-
-        if (this.position.top < 5) {
-          this.position.top = space;
-        } else if (this.position.top + this.height > docHeight) {
-          this.position.top = docHeight - this.height - space;
-        }
-
-        this.$arrow.css(_defineProperty({
-          left: '-20px'
-        }, "left", oldTop - this.position.top - arrowBorderWidth));
-      }
-    }, {
-      key: "show",
-      value: function show() {
-        this.$el.show();
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        this.$el.hide();
-      }
-    }]);
-
-    return Popup;
-  }(_component["default"]);
-
-  module.exports = Popup;
-});
-
-},{"../core/component":13}],8:[function(require,module,exports){
+},{"../core/component":12,"./button":5}],7:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -1366,7 +1149,7 @@ function hasOwnProperty(obj, prop) {
   };
 });
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../model/image", "../view/layer/image", "../view/property/base", "../view/property/image", "../model/layer", "../core/observer"], factory);
@@ -1540,7 +1323,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = ImageLayer;
 });
 
-},{"../core/observer":15,"../model/image":18,"../model/layer":19,"../view/layer/image":30,"../view/property/base":32,"../view/property/image":33}],10:[function(require,module,exports){
+},{"../core/observer":14,"../model/image":17,"../model/layer":18,"../view/layer/image":29,"../view/property/base":31,"../view/property/image":32}],9:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../model/page", "../view/page", "../core/observer"], factory);
@@ -1627,7 +1410,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = PageController;
 });
 
-},{"../core/observer":15,"../model/page":21,"../view/page":31}],11:[function(require,module,exports){
+},{"../core/observer":14,"../model/page":20,"../view/page":30}],10:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../view/topbar", "../view/topbar/newLayer", "../core/observer", "../component/button", "./image"], factory);
@@ -1776,11 +1559,6 @@ function hasOwnProperty(obj, prop) {
           handler: function handler() {
             self.onPageSettings();
           }
-        }), new _button["default"]({
-          text: '<span class="fa fa-file-o"></span> 客户端预览',
-          handler: function handler() {
-            self.onAppPreview();
-          }
         })], 'right');
       }
       /**
@@ -1890,7 +1668,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = TopbarController;
 });
 
-},{"../component/button":5,"../core/observer":15,"../view/topbar":35,"../view/topbar/newLayer":36,"./image":9}],12:[function(require,module,exports){
+},{"../component/button":5,"../core/observer":14,"../view/topbar":34,"../view/topbar/newLayer":35,"./image":8}],11:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./observer", "util"], factory);
@@ -1983,6 +1761,10 @@ function hasOwnProperty(obj, prop) {
        */
 
       _this.prefix = '';
+      /**
+       * 样式类名
+       */
+
       _this.className = '';
       /**
        * 添加到指定对象
@@ -2146,7 +1928,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Base;
 });
 
-},{"./observer":15,"util":4}],13:[function(require,module,exports){
+},{"./observer":14,"util":4}],12:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./base"], factory);
@@ -2399,7 +2181,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Component;
 });
 
-},{"./base":12}],14:[function(require,module,exports){
+},{"./base":11}],13:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./observer"], factory);
@@ -2470,7 +2252,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Model;
 });
 
-},{"./observer":15}],15:[function(require,module,exports){
+},{"./observer":14}],14:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -2580,7 +2362,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Observer;
 });
 
-},{}],16:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./core/observer", "./controller/topbar", "./constant/keyCode", "./controller/page", "./view/property/property"], factory);
@@ -2685,16 +2467,17 @@ function hasOwnProperty(obj, prop) {
         });
         topbar.init();
         property.init();
+        page.init();
         $('#app').append(property.$el);
         $('#app').append(topbar.view.$el);
         this.bind();
-        this.topbar = topbar; // 很多都是在页面上操作的，或者跟页面有关联，但是如果要降低耦合，就不能有太多关联
-        // 
+        this.topbar = topbar;
+        this.property = property; // 很多都是在页面上操作的，或者跟页面有关联，但是如果要降低耦合，就不能有太多关联
 
-        page.init();
         $('#app').append(page.view.$el); // 居中
 
-        page.center(); // $('.property').css('height', $('#app').height() + 'px');
+        page.center();
+        property.initHeight();
       }
     }, {
       key: "bind",
@@ -2908,7 +2691,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = AlbumEditor;
 });
 
-},{"./constant/keyCode":8,"./controller/page":10,"./controller/topbar":11,"./core/observer":15,"./view/property/property":34}],17:[function(require,module,exports){
+},{"./constant/keyCode":7,"./controller/page":9,"./controller/topbar":10,"./core/observer":14,"./view/property/property":33}],16:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3105,7 +2888,7 @@ function hasOwnProperty(obj, prop) {
   };
 });
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../core/model", "../util/index"], factory);
@@ -3219,7 +3002,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = ImageModel;
 });
 
-},{"../core/model":14,"../util/index":27}],19:[function(require,module,exports){
+},{"../core/model":13,"../util/index":26}],18:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../core/model", "./position", "../util/index"], factory);
@@ -3384,7 +3167,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = BaseLayerModel;
 });
 
-},{"../core/model":14,"../util/index":27,"./position":22}],20:[function(require,module,exports){
+},{"../core/model":13,"../util/index":26,"./position":21}],19:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3412,7 +3195,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Origin;
 });
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../core/model", "./size"], factory);
@@ -3523,7 +3306,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = PageModel;
 });
 
-},{"../core/model":14,"./size":23}],22:[function(require,module,exports){
+},{"../core/model":13,"./size":22}],21:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./size", "./origin", "../util/index"], factory);
@@ -3600,7 +3383,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Position;
 });
 
-},{"../util/index":27,"./origin":20,"./size":23}],23:[function(require,module,exports){
+},{"../util/index":26,"./origin":19,"./size":22}],22:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3628,7 +3411,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Size;
 });
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3677,7 +3460,7 @@ function hasOwnProperty(obj, prop) {
   };
 });
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3720,7 +3503,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = deepClone;
 });
 
-},{}],26:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3745,7 +3528,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = firstUpperCase;
 });
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./firstUpperCase", "./deepClone", "./convert", "./validate"], factory);
@@ -3776,7 +3559,7 @@ function hasOwnProperty(obj, prop) {
   };
 });
 
-},{"./convert":24,"./deepClone":25,"./firstUpperCase":26,"./validate":28}],28:[function(require,module,exports){
+},{"./convert":23,"./deepClone":24,"./firstUpperCase":25,"./validate":27}],27:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define([], factory);
@@ -3799,7 +3582,7 @@ function hasOwnProperty(obj, prop) {
   };
 });
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/base", "../../mixins/draggable"], factory);
@@ -3992,7 +3775,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = BaseLayer;
 });
 
-},{"../../core/base":12,"../../mixins/draggable":17}],30:[function(require,module,exports){
+},{"../../core/base":11,"../../mixins/draggable":16}],29:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["./base"], factory);
@@ -4144,7 +3927,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = ImageLayer;
 });
 
-},{"./base":29}],31:[function(require,module,exports){
+},{"./base":28}],30:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/component", "../../mixins/draggable"], factory);
@@ -4233,7 +4016,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Page;
 });
 
-},{"../../core/component":13,"../../mixins/draggable":17}],32:[function(require,module,exports){
+},{"../../core/component":12,"../../mixins/draggable":16}],31:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/component", "../../util/index"], factory);
@@ -4265,6 +4048,10 @@ function hasOwnProperty(obj, prop) {
 
   function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+  function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+  function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
   function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
   function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -4293,6 +4080,13 @@ function hasOwnProperty(obj, prop) {
     }
 
     _createClass(BaseProperty, [{
+      key: "_render",
+      value: function _render() {
+        _get(_getPrototypeOf(BaseProperty.prototype), "_render", this).call(this);
+
+        this.initValue();
+      }
+    }, {
       key: "_bind",
       value: function _bind() {
         var $el = this.$el;
@@ -4417,6 +4211,21 @@ function hasOwnProperty(obj, prop) {
 
         this.model.alpha = v;
       }
+    }, {
+      key: "initValue",
+      value: function initValue() {
+        var model = this.model;
+        var inputList = this.$el.find('input[type=text]');
+        console.log(model);
+        inputList.each(function () {
+          var $this = $(this);
+          var name = $this.attr('name');
+
+          if (model[name] != 'undefined') {
+            $this.val(model[name]);
+          }
+        });
+      }
     }]);
 
     return BaseProperty;
@@ -4425,7 +4234,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = BaseProperty;
 });
 
-},{"../../core/component":13,"../../util/index":27}],33:[function(require,module,exports){
+},{"../../core/component":12,"../../util/index":26}],32:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/component"], factory);
@@ -4501,7 +4310,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = ImageProperty;
 });
 
-},{"../../core/component":13}],34:[function(require,module,exports){
+},{"../../core/component":12}],33:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/component"], factory);
@@ -4563,7 +4372,7 @@ function hasOwnProperty(obj, prop) {
       value: function init() {
         _get(_getPrototypeOf(Property.prototype), "init", this).call(this);
 
-        this.$el.hide();
+        this.hide();
       }
       /**
        * alias
@@ -4578,7 +4387,17 @@ function hasOwnProperty(obj, prop) {
     }, {
       key: "show",
       value: function show() {
-        this.$el.show();
+        this.$el.css('right', '0');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        this.$el.css('right', '-300px');
+      }
+    }, {
+      key: "initHeight",
+      value: function initHeight() {
+        this.$el.css('height', '100%');
       }
     }]);
 
@@ -4588,26 +4407,25 @@ function hasOwnProperty(obj, prop) {
   module.exports = Property;
 });
 
-},{"../../core/component":13}],35:[function(require,module,exports){
+},{"../../core/component":12}],34:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["../../core/component", "../../component/button", "../../component/dropdown", "../../component/popup"], factory);
+    define(["../../core/component", "../../component/button", "../../component/dropdown"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(require("../../core/component"), require("../../component/button"), require("../../component/dropdown"), require("../../component/popup"));
+    factory(require("../../core/component"), require("../../component/button"), require("../../component/dropdown"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(global.component, global.button, global.dropdown, global.popup);
+    factory(global.component, global.button, global.dropdown);
     global.index = mod.exports;
   }
-})(this, function (_component, _button, _dropdown, _popup) {
+})(this, function (_component, _button, _dropdown) {
   "use strict";
 
   _component = _interopRequireDefault(_component);
   _button = _interopRequireDefault(_button);
   _dropdown = _interopRequireDefault(_dropdown);
-  _popup = _interopRequireDefault(_popup);
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -4948,7 +4766,7 @@ function hasOwnProperty(obj, prop) {
   module.exports = Topbar;
 });
 
-},{"../../component/button":5,"../../component/dropdown":6,"../../component/popup":7,"../../core/component":13}],36:[function(require,module,exports){
+},{"../../component/button":5,"../../component/dropdown":6,"../../core/component":12}],35:[function(require,module,exports){
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../core/component"], factory);
@@ -5112,5 +4930,5 @@ function hasOwnProperty(obj, prop) {
   module.exports = NewLayerDialog;
 });
 
-},{"../../core/component":13}]},{},[16])(16)
+},{"../../core/component":12}]},{},[15])(15)
 });

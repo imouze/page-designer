@@ -43,7 +43,9 @@ class Base extends Observer {
          * 前缀
          */
         this.prefix = '';
-
+        /**
+         * 样式类名
+         */
         this.className = '';
         /**
          * 添加到指定对象
@@ -146,10 +148,11 @@ class Base extends Observer {
      */
     _bind(args) {
         const self = this;
+        // 控件获取焦点
         this.$el.on('click', function (e) {
             self.$el.addClass('focused')
         });
-
+        // 控件失去焦点
         $(document).on('click', function (e) {
             if (!(self.$el.is(e.target) || self.$el.has(e.target).length)) {
                 self.$el.removeClass('focused')

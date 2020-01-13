@@ -73,27 +73,26 @@ class AlbumEditor extends Observer{
                 instance.view.restrict = page.view.$page;
                 page.view.addChild(instance.view);
             }
-        })
-        topbar.init();
+        });
 
+        topbar.init();
         property.init();
+        page.init();
+
         $('#app').append(property.$el);
         $('#app').append(topbar.view.$el);
 
         this.bind();
 
         this.topbar = topbar;
+
+        this.property = property;
         
         // 很多都是在页面上操作的，或者跟页面有关联，但是如果要降低耦合，就不能有太多关联
-        // 
-        page.init();
         $('#app').append(page.view.$el);
         // 居中
         page.center();
-
-
-
-        // $('.property').css('height', $('#app').height() + 'px');
+        property.initHeight();
     }
 
     bind(){

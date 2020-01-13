@@ -10,7 +10,7 @@ class Property extends Component{
     init(){
         super.init();
 
-        this.$el.hide();
+        this.hide();
     }
 
     /**
@@ -23,7 +23,15 @@ class Property extends Component{
     }
 
     show(){
-        this.$el.show();
+        this.$el.css('right', '0');
+    }
+
+    hide(){
+        this.$el.css('right', '-300px');
+    }
+
+    initHeight(){
+        this.$el.css('height', '100%');
     }
 }
 

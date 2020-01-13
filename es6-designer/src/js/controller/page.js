@@ -17,8 +17,13 @@ class PageController extends Observer {
     }
 
     init() {
+        /**
+         * 页面业务数据存在弹窗填写和修改的时候，页面区只关心子层的集合
+         */
         this.model = new PageModel();
-        this.view = new PageView();
+        this.view = new PageView({
+            model: this.model
+        });
         this.view.init();
     }
 

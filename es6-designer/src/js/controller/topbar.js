@@ -96,11 +96,6 @@ class TopbarController extends Observer{
             handler: function(){
                 self.onPageSettings()
             }
-        }), new Button({
-            text:'<span class="fa fa-file-o"></span> 客户端预览',
-            handler: function(){
-                self.onAppPreview()
-            }
         })], 'right');
     }
 
@@ -194,6 +189,20 @@ class TopbarController extends Observer{
 
         this.emit('create:layer', instance);
     }
+
+    onFileManagerDialog(){
+
+    }
+
+    onLayerManagerDialog(){
+
+    }
+
+    onDynamicDataDialog(){}
+
+    onAddComponentsDialog(){}
+
+    
 }
 
 module.exports = TopbarController;

@@ -15,6 +15,11 @@ class Page extends draggable(Component){
         `
 
         this.dragEl = $(document);
+
+
+        if(options.model){
+            this.model = options.model;
+        }
     }
 
     _bind(){
